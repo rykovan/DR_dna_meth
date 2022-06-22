@@ -61,3 +61,20 @@
 #eigenvalues and varplot
 ./pca.py /scratch2/emanuele/data-nrykova/first_six_cancer/chr14-merge-1350.txt --pc 12  --evalues evalues.txt
 ./eig_var.py --eigenplot eigenplot.png --varplot varplot.png
+
+## only primary_tumor samples analysis filter 
+./merge_clin_sample.py
+./chr_merge_tumor.py 
+#algorithms
+
+./pca.py /home/nrykova/masteruab/MethylationDNA/chr_merged_onlytumor.txt --pc 2  --matrix mfile_tumor.txt > pca_latent_tumor.txt
+./tsne.py /home/nrykova/masteruab/MethylationDNA/chr_merged_onlytumor.txt --pc 20 --per 30  > tsne_latent_tumor.txt
+./ae.py /home/nrykova/masteruab/MethylationDNA/chr_merged_onlytumor.txt --indim2 256 > ae_latent_tumor.txt 
+
+./plot_output_pca.py /scratch2/emanuele/data-nrykova/filename-vs-caseid.txt pca_latent_tumor.txt --outfname pca_tumor_graph.png 
+./plot_output_tsne.py /scratch2/emanuele/data-nrykova/filename-vs-caseid.txt tsne_latent_tumor.txt --outfname tsne_tumor_graph.png 
+./plot-output-ae.py /scratch2/emanuele/data-nrykova/filename-vs-caseid.txt ae_latent_tumor.txt --outfname ae_tumor_graph.png 
+
+
+
+
